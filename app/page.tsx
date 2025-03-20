@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Clock } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const topics = [
@@ -61,7 +61,7 @@ export default function Home() {
     <main className="container mx-auto py-10 px-4">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tight mb-4">
-          Frontend além da tela. A arte de criar experiências visuais
+          Frontend além da tela. A arte de criar experiências digitais
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Uma jornada pelo mundo do desenvolvimento web frontend, explicada de

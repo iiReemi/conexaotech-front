@@ -1,8 +1,13 @@
-import type React from "react";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Navigation } from "@/components/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Inter } from "next/font/google";
+import type React from "react";
+import "./globals.css";
+
+import Chat from "@/components/chat";
+import EmojiReactions from "@/components/emoji-reactions";
+import ReactionListener from "@/components/reaction-listener";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,14 +32,12 @@ export default function RootLayout({
         >
           <Navigation />
           {children}
+          <Toaster />
           <ReactionListener />
+          <Chat />
           <EmojiReactions />
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
-import "./globals.css";
-import EmojiReactions from "@/components/emoji-reactions";
-import ReactionListener from "@/components/reaction-listener";

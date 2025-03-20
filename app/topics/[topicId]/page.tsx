@@ -1,18 +1,38 @@
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { Timer } from "@/components/timer";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Chat from "@/components/chat";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  MessageCircle,
+  Plus,
+  Send,
+  Smile
+} from "lucide-react";
+import Link from "next/link";
+import { notFound, useParams } from "next/navigation";
+import { useState } from "react";
 
-interface TopicPageProps {
-  params: {
-    topicId: string;
-  };
-}
+export default function TopicPage() {
+  const { topicId } = useParams<{ topicId: string }>();
 
-export default async function TopicPage({ params }: TopicPageProps) {
-  const { topicId } = await params;
+  const [typing, setTyping] = useState({
+    lucas: false,
+    vinicius: false,
+    joao: false,
+    milena: false,
+    bruno: false,
+    lincoln: false,
+  });
+
+  const [postOperations, setPostOperations] = useState({
+    like: false,
+    comment: false,
+    share: false,
+  });
 
   const topics = [
     {
@@ -732,19 +752,19 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
           <p className="mb-4">
             Você já se sentiu perdido ou frustrado ao usar um site? As
-            Heurísticas de Nielsen são 10 princípios fundamentais que nos ajudam
-            a criar interfaces que as pessoas adoram usar. Desenvolvidos pelo
-            especialista em usabilidade Jakob Nielsen, esses princípios são como
-            regras de bom senso para design digital.
+            Heurísticas de Nielsen são 10 princípios fundamentais que ajudam a
+            criar interfaces intuitivas e agradáveis. Imagine usar o Instagram:
+            tudo parece natural, fácil e intuitivo. Vamos ver esses princípios
+            com exemplos práticos do Instagram!
           </p>
 
           <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg mb-4">
             <p className="font-medium">Analogia simples:</p>
             <p>
-              Se um site fosse uma loja física, as heurísticas seriam como as
-              regras básicas de atendimento ao cliente: sinalizações claras,
-              organização lógica dos produtos, funcionários prestativos e um
-              ambiente agradável.
+              Se um site fosse o Instagram, as heurísticas seriam como as boas
+              práticas já familiares da plataforma: notificações claras, botões
+              fáceis de entender, navegação intuitiva e liberdade para corrigir
+              erros.
             </p>
           </div>
 
@@ -753,16 +773,203 @@ export default async function TopicPage({ params }: TopicPageProps) {
               <h3 className="text-xl font-semibold mb-2">
                 1. Mantenha os usuários informados
               </h3>
-              <p>
-                As pessoas devem sempre saber o que está acontecendo no site.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como uma barra de progresso ao fazer download</li>
-                  <li>Como um aviso "Pedido enviado com sucesso!"</li>
-                  <li>Como o ícone girando quando algo está carregando</li>
-                </ul>
+              <ul className="list-disc pl-6">
+                <li>Como a barra que indica o progresso ao postar stories</li>
+                <li>
+                  Como notificações claras sobre novas curtidas e comentários
+                </li>
+                <li>
+                  Como indicadores mostrando que alguém está digitando no Direct
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex flex-row gap-12 items-center">
+              <div className="flex gap-4">
+                <div className="flex gap-1">
+                  <Heart
+                    className={`h-8 w-8 text-zinc-500 hover:cursor-pointer ${
+                      postOperations.like && "text-red-600 fill-red-600"
+                    }`}
+                    onClick={() => {
+                      setPostOperations({
+                        ...postOperations,
+                        like: !postOperations.like,
+                      });
+                    }}
+                  />
+                  {postOperations.like ? "5" : "4"}
+                </div>
+                <div className="flex gap-1">
+                  <MessageCircle className="h-8 w-8 text-zinc-500" /> 2
+                </div>
+                <div className="flex gap-1">
+                  <Send className="h-8 w-8 text-zinc-500" /> 7
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-6">
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, lucas: true })}
+                  onMouseLeave={() => setTyping({ ...typing, lucas: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="https://media.licdn.com/dms/image/v2/D4D03AQH-Rf02lJH8oA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682477255312?e=1747872000&v=beta&t=BLAMZlB1lFl7xtv5OhirOj0G6odPbi-aF_9O7UXKDfI"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Lucas Santana</span>
+                    {!typing.lucas && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.lucas && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">To com sono</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, vinicius: true })}
+                  onMouseLeave={() => setTyping({ ...typing, vinicius: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/vinicius.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Vinicius Catarino</span>
+                    {!typing.vinicius && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.vinicius && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Boa nego!</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, milena: true })}
+                  onMouseLeave={() => setTyping({ ...typing, milena: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/milena.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Milena Costa</span>
+                    {!typing.milena && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.milena && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Tá pronto?</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, joao: true })}
+                  onMouseLeave={() => setTyping({ ...typing, joao: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/joao.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">João Costa</span>
+                    {!typing.joao && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.joao && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Vlw papito</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, bruno: true })}
+                  onMouseLeave={() => setTyping({ ...typing, bruno: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/bruno.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Bruno Santos</span>
+                    {!typing.bruno && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.bruno && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Ta ai Edzao?</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, lincoln: true })}
+                  onMouseLeave={() => setTyping({ ...typing, lincoln: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/lincoln.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Lincoln Almeida</span>
+                    {!typing.lincoln && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.lincoln && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Opre</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -770,183 +977,208 @@ export default async function TopicPage({ params }: TopicPageProps) {
               <h3 className="text-xl font-semibold mb-2">
                 2. Fale a língua do usuário
               </h3>
-              <p>Use palavras e conceitos familiares, não jargão técnico.</p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>
-                    Como usar "Enviar mensagem" em vez de "Submeter formulário"
-                  </li>
-                  <li>
-                    Como usar ícones que todos reconhecem (lupa para busca)
-                  </li>
-                  <li>Como explicar termos complexos de forma simples</li>
-                </ul>
+              <ul className="list-disc pl-6">
+                <li>
+                  Como "Enviar mensagem" em vez de algo técnico como "Submeter
+                  formulário"
+                </li>
+                <li>
+                  Ícones claros e universais como o coração (curtir) ou
+                  aviãozinho (Direct)
+                </li>
+                <li>Termos simples como "Stories" e não "Conteúdo efêmero"</li>
+              </ul>
+            </div>
+
+            <div className="flex flex-row gap-4">
+              <div className="flex flex-col space-y-2 items-center">
+                <div className="relative">
+                  <img
+                    src="/avatars/ed.jpeg"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0"
+                  />
+                  <div className="flex flex-col items-center justify-center absolute bottom-0 top-16 right-0 h-8 w-8 bg-sky-500 rounded-full border-2">
+                    <Plus color="white" size={20} />
+                  </div>
+                </div>
+                <span className="text-zinc-500 text-sm">Seu story</span>
               </div>
-              <Chat />
+              <div className="flex flex-col space-y-2 items-center">
+                <div className="relative">
+                  <img
+                    src="/avatars/ed.jpeg"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0"
+                  />
+                  <div className="flex flex-col items-center justify-center absolute bottom-0 top-16 right-0 h-8 w-8 bg-sky-500 rounded-full border-2">
+                    <Plus color="white" size={20} />
+                  </div>
+                </div>
+                <span className="text-zinc-500 text-sm">Conteúdo efêmero</span>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-2 w-full items-center">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Abrir emojis"
+                    className="w-20"
+                  >
+                    {" "}
+                  </Button>
+                  <Input placeholder="" />
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Abrir emojis"
+                    className="w-20"
+                  >
+                    {" "}
+                  </Button>
+                  <Button
+                    size="icon"
+                    aria-label="Enviar mensagem"
+                    variant={"outline"}
+                    className="w-20"
+                  >
+                    {" "}
+                  </Button>
+                </div>
+                <div className="flex gap-2 w-full">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Abrir emojis"
+                    className="w-20"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                  <Input placeholder="Digite sua mensagem" />
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    aria-label="Abrir emojis"
+                    className="w-20"
+                  >
+                    <Smile className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="icon"
+                    aria-label="Enviar mensagem"
+                    variant={"outline"}
+                    className="w-20"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 3. Dê controle e liberdade
               </h3>
-              <p>
-                Permita que os usuários desfaçam ações e saiam de situações
-                indesejadas.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como um botão "Cancelar" em um formulário</li>
-                  <li>Como a opção de desfazer uma ação</li>
-                  <li>Como uma saída clara de um processo de compra</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Como poder excluir uma postagem que não gostou</li>
+                <li>Como desfazer o envio de uma mensagem no Direct</li>
+                <li>Como sair facilmente de um story ou live</li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 4. Seja consistente
               </h3>
-              <p>Mantenha padrões visuais e de interação em todo o site.</p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como botões de ação que sempre têm a mesma cor</li>
-                  <li>
-                    Como menus que funcionam da mesma forma em todas as páginas
-                  </li>
-                  <li>
-                    Como termos que significam a mesma coisa em todo o site
-                  </li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Como os ícones sempre no mesmo lugar</li>
+                <li>
+                  Como ações padrão (curtir, comentar, compartilhar) sempre
+                  iguais
+                </li>
+                <li>
+                  Cores e estilos visuais consistentes em toda a plataforma
+                </li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">5. Previna erros</h3>
-              <p>
-                Melhor que boas mensagens de erro é um design que evita que
-                erros aconteçam.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como sugestões de preenchimento em um campo de busca</li>
-                  <li>Como confirmação antes de ações irreversíveis</li>
-                  <li>Como validação de formulários em tempo real</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Como sugestões automáticas ao digitar hashtags</li>
+                <li>Como confirmação antes de apagar uma publicação</li>
+                <li>Como indicar se uma mensagem foi visualizada ou enviada</li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 6. Reconhecimento em vez de memorização
               </h3>
-              <p>
-                Mostre opções visíveis em vez de fazer os usuários lembrarem de
-                informações.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como um menu visível em vez de comandos ocultos</li>
-                  <li>Como sugestões baseadas em buscas anteriores</li>
-                  <li>Como ícones reconhecíveis para funções comuns</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Como menus visíveis (stories sempre no topo)</li>
+                <li>Como sugerir contatos frequentes no Direct</li>
+                <li>Ícones claros sem necessidade de memorizar funções</li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 7. Flexibilidade e eficiência
               </h3>
-              <p>
-                Ofereça atalhos para usuários experientes sem complicar para
-                iniciantes.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como atalhos de teclado para ações comuns</li>
-                  <li>Como a opção de salvar informações para uso futuro</li>
-                  <li>Como personalização da interface</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Como atalhos rápidos nos stories (deslizar para reagir)</li>
+                <li>Como salvar posts para ver depois</li>
+                <li>
+                  Personalizar notificações por perfil ou conteúdo específico
+                </li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 8. Design minimalista
               </h3>
-              <p>
-                Mantenha apenas o essencial, removendo informações irrelevantes.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como uma página limpa sem distrações</li>
-                  <li>Como textos concisos e diretos</li>
-                  <li>Como hierarquia visual clara</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>Interface limpa e sem distrações ao visualizar fotos</li>
+                <li>Textos curtos e diretos nas legendas e notificações</li>
+                <li>Hierarquia visual clara entre feed, stories e directs</li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 9. Ajude a reconhecer e corrigir erros
               </h3>
-              <p>
-                Quando erros acontecem, explique claramente o problema e como
-                resolvê-lo.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como mensagens de erro em linguagem simples</li>
-                  <li>Como sugestões específicas para corrigir problemas</li>
-                  <li>Como destaque visual para campos com erro</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>
+                  Como mensagens claras se a internet cai ("Tentar novamente")
+                </li>
+                <li>Como alertar se você tentar postar sem legenda</li>
+                <li>
+                  Como avisos visuais para campos obrigatórios ao editar perfil
+                </li>
+              </ul>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 10. Ofereça ajuda e documentação
               </h3>
-              <p>
-                Mesmo que o ideal seja usar o site sem ajuda, ofereça suporte
-                quando necessário.
-              </p>
-              <div className="mt-2 text-sm">
-                <strong>No dia a dia:</strong>
-                <ul className="list-disc pl-6 mt-1">
-                  <li>Como dicas contextuais que aparecem quando necessário</li>
-                  <li>Como uma seção de perguntas frequentes</li>
-                  <li>Como tutoriais para funções complexas</li>
-                </ul>
-              </div>
+              <ul className="list-disc pl-6">
+                <li>
+                  Como guias de ajuda facilmente acessíveis nas configurações
+                </li>
+                <li>Dicas contextuais sobre novos recursos (ex: Reels)</li>
+                <li>Seção completa de FAQ com dúvidas frequentes</li>
+              </ul>
             </div>
           </div>
 
-          <div className="bg-muted dark:bg-muted/70 p-4 rounded-lg mb-4">
-            <h4 className="font-medium mb-2">
-              Por que isso importa para a empresa?
-            </h4>
-            <p>
-              Interfaces bem projetadas seguindo esses princípios resultam em
-              maior satisfação do cliente, menos chamados de suporte, maior
-              conversão e fidelidade à marca. Um estudo da Forrester descobriu
-              que cada dólar investido em UX traz $100 em retorno. Além disso,
-              sites com boa usabilidade têm taxas de abandono 67% menores.
-            </p>
-          </div>
-
           <p>
-            Aplicar essas regras de ouro não requer grandes investimentos, mas
-            pode transformar completamente como os usuários percebem e interagem
-            com nossos produtos digitais, criando experiências que eles adoram e
-            recomendam.
+            Aplicar essas regras como o Instagram faz resulta em usuários mais
+            felizes, engajados e fiéis à plataforma, criando uma experiência que
+            é fácil, intuitiva e divertida.
           </p>
         </>
       ),
