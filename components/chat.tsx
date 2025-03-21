@@ -7,11 +7,13 @@ import { Button } from "./ui/button";
 import { Send, MessageCircle, X, Smile, User } from "lucide-react";
 import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import { randomUUID } from "crypto";
 
 const socket = io("http://localhost:4000");
 
 interface ChatMessage {
   sender: string;
+  senderId: string;
   message: string;
 }
 
@@ -22,6 +24,7 @@ export default function Chat() {
   const [username, setUsername] = useState("Anonimo");
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [myId, setMyId] = useState<string>(() => crypto.randomUUID());
 
   useEffect(() => {
     socket.on("message", (msg: ChatMessage) => {
@@ -38,20 +41,19 @@ export default function Chat() {
   }, [messages]);
 
   const sendMessage = () => {
-    if (message.trim() && username.trim()) {
+    const nickname = localStorage.getItem("nickname") || "Anonimo";
+    setUsername(nickname);
+
+    if (message.trim() && nickname.trim()) {
       const newMessage: ChatMessage = {
-        sender: username,
+        sender: nickname,
+        senderId: myId,
         message: message.trim(),
       };
       socket.emit("message", newMessage);
       setMessage("");
       setIsEmojiPickerOpen(false);
     }
-  };
-
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-    localStorage.setItem("username", e.target.value);
   };
 
   const toggleChat = () => {
@@ -91,12 +93,6 @@ export default function Chat() {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <Input
-              placeholder="Qual seu nome e sobrenome?"
-              value={username}
-              onChange={handleUsernameChange}
-              className="dark:text-white text-black"
-            />
           </CardHeader>
 
           <CardContent className="p-0">
@@ -107,7 +103,7 @@ export default function Chat() {
                 </p>
               ) : (
                 messages.map((msg, index) => {
-                  const isCurrentUser = msg.sender === username;
+                  const isCurrentUser = msg.senderId === myId;
                   return (
                     <div
                       key={index}

@@ -8,6 +8,7 @@ import Chat from "@/components/chat";
 import EmojiReactions from "@/components/emoji-reactions";
 import ReactionListener from "@/components/reaction-listener";
 import { Toaster } from "sonner";
+import Nickname from "@/components/nickname";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Toaster />
+          <Nickname />
           <ReactionListener />
           <Chat />
           <EmojiReactions />
