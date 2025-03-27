@@ -1,14 +1,19 @@
 "use client";
 
-import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import { EmojiClickData } from "emoji-picker-react";
 import { MessageCircle, Send, Smile, X } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Input } from "./ui/input";
 
-const socket = io("http://localhost:4000");
+const EmojiPicker = dynamic(() => import("emoji-picker-react"), {
+  ssr: false,
+});
+
+const socket = io(process.env.BACKEND);
 
 interface ChatMessage {
   sender: string;
@@ -23,7 +28,12 @@ export default function Chat() {
   const [username, setUsername] = useState("Anonimo");
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [myId, setMyId] = useState<string>(() => crypto.randomUUID());
+
+  const [myId, setMyId] = useState<string>("");
+
+useEffect(() => {
+  setMyId(crypto.randomUUID());
+}, []);
 
   useEffect(() => {
     socket.on("message", (msg: ChatMessage) => {

@@ -5,6 +5,7 @@ import type React from "react";
 import "./globals.css";
 
 import Chat from "@/components/chat";
+import EmojiReactions from "@/components/emoji-reactions";
 import Nickname from "@/components/nickname";
 import ReactionListener from "@/components/reaction-listener";
 import { Toaster } from "sonner";
@@ -36,7 +37,7 @@ export default function RootLayout({
           <Nickname />
           <ReactionListener />
           <Chat />
-          {/* <EmojiReactions /> */}
+          <EmojiReactions />
         </ThemeProvider>
       </body>
     </html>
