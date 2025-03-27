@@ -13,7 +13,7 @@ const EmojiPicker = dynamic(() => import("emoji-picker-react"), {
   ssr: false,
 });
 
-const socket = io(process.env.BACKEND);
+const socket = io(process.env.NEXT_PUBLIC_API);
 
 interface ChatMessage {
   sender: string;

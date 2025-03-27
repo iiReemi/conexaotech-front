@@ -10,7 +10,7 @@ import heart from "@/animations/heart.json";
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-const socket = io(process.env.BACKEND!);
+const socket = io(process.env.NEXT_PUBLIC_API);
 
 interface Reaction {
   type: string;

@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 
-const socket = io(process.env.BACKEND);
+const socket = io(process.env.NEXT_PUBLIC_API);
 
 interface EmojiReaction {
   type: string;
