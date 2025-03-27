@@ -4,11 +4,6 @@ import { Inter } from "next/font/google";
 import type React from "react";
 import "./globals.css";
 
-import Chat from "@/components/chat";
-import EmojiReactions from "@/components/emoji-reactions";
-import Nickname from "@/components/nickname";
-import ReactionListener from "@/components/reaction-listener";
-import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,11 +28,11 @@ export default function RootLayout({
         >
           <Navigation />
           {children}
-          <Toaster />
+          {/* <Toaster />
           <Nickname />
           <ReactionListener />
           <Chat />
-          <EmojiReactions />
+          <EmojiReactions /> */}
         </ThemeProvider>
       </body>
     </html>
