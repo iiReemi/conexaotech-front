@@ -31,9 +31,9 @@ export default function Chat() {
 
   const [myId, setMyId] = useState<string>("");
 
-useEffect(() => {
-  setMyId(crypto.randomUUID());
-}, []);
+  useEffect(() => {
+    setMyId(crypto.randomUUID());
+  }, []);
 
   useEffect(() => {
     socket.on("message", (msg: ChatMessage) => {
@@ -51,7 +51,7 @@ useEffect(() => {
 
   const sendMessage = () => {
     if (typeof window === "undefined") return;
-    
+
     const nickname = localStorage.getItem("nickname") || "Anonimo";
     setUsername(nickname);
 
@@ -126,7 +126,7 @@ useEffect(() => {
                         className={`p-2 rounded-lg text-sm ${
                           isCurrentUser
                             ? "bg-primary text-primary-foreground rounded-xl"
-                            : "bg-[#f4f4f4] rounded-lg p-4"
+                            : "bg-[#f4f4f4] rounded-lg p-4 text-black"
                         }`}
                       >
                         <div className="flex flex-col gap-2">
