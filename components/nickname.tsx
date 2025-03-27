@@ -11,17 +11,19 @@ export default function Nickname() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     
-    const storedNickname = localStorage.getItem("nickname");
+    // const storedNickname = localStorage.getItem("nickname");
+    const storedNickname = "";
     if (!storedNickname) {
       setShowModal(true);
     }
   }, []);
 
   const saveNickname = () => {
-    if (typeof window === "undefined") return;
     
-    if (nickname.trim()) {
-      localStorage.setItem("nickname", nickname.trim());
+    if (nickname.trim()) {if (
+      typeof window === "undefined") return;
+
+      // localStorage.setItem("nickname", nickname.trim());
       setShowModal(false);
     }
   };

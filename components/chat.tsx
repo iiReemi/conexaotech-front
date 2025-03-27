@@ -52,7 +52,9 @@ useEffect(() => {
   const sendMessage = () => {
     if (typeof window === "undefined") return;
     
-    const nickname = localStorage.getItem("nickname") || "Anonimo";
+    // const nickname = localStorage.getItem("nickname") || "Anonimo";
+
+    const nickname = ""
     setUsername(nickname);
 
     if (message.trim() && nickname.trim()) {

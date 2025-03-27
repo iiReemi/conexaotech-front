@@ -60,15 +60,15 @@ export default function EmojiReactions() {
       }
     };
 
-    if (typeof window !== "undefined") {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    // if (typeof window !== "undefined") {
+    //   document.addEventListener("mousedown", handleClickOutside);
+    // }
 
-    return () => {
-      if (typeof window !== "undefined") {
-        document.removeEventListener("mousedown", handleClickOutside);
-      }
-    };
+    // return () => {
+    //   if (typeof window !== "undefined") {
+    //     document.removeEventListener("mousedown", handleClickOutside);
+    //   }
+    // };
   }, []);
 
   return (
