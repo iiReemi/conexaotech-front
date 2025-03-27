@@ -19,6 +19,8 @@ interface Reaction {
 export default function ReactionListener() {
   const [animations, setAnimations] = useState<Reaction[]>([]);
 
+  if (typeof window === "undefined") return <></>;
+
   useEffect(() => {
     socket.on("reaction", (reaction: { type: string }) => {
       const animationData = getAnimationData(reaction.type);
