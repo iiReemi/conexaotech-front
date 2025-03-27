@@ -1,12 +1,14 @@
 "use client";
 
-import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 import clap from "@/animations/clap.json";
 import confetti from "@/animations/confetti.json";
 import heart from "@/animations/heart.json";
+
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const socket = io(process.env.BACKEND!);
 

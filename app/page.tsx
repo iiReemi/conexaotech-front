@@ -1,6 +1,5 @@
 "use client"
 
-import ReactionListener from "@/components/reaction-listener";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -56,8 +55,6 @@ export default function Home() {
 
   return (
     <main className="container mx-auto py-10 px-4">
-      <ReactionListener />
-
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tight mb-4">
           Frontend além da tela. A arte de criar experiências digitais
