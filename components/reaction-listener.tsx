@@ -3,13 +3,16 @@
 import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import clap from "../public/animations/clap.json";
+import confetti from "../public/animations/confetti.json";
+import heart from "../public/animations/heart.json";
 
 const socket = io(process.env.BACKEND);
 
 interface Reaction {
   type: string;
   id: number;
-  animationPath: string;
+  animationPath: any;
   size: number;
 }
 
@@ -44,11 +47,11 @@ export default function ReactionListener() {
   const getAnimationData = (type: string) => {
     switch (type) {
       case "heart":
-        return { animationPath: "/animations/heart.json", size: 400 };
+        return { animationPath: heart, size: 400 };
       case "clap":
-        return { animationPath: "/animations/clap.json", size: 300 };
+        return { animationPath: clap, size: 300 };
       case "confetti":
-        return { animationPath: "/animations/confetti.json", size: 700 };
+        return { animationPath: confetti, size: 700 };
       default:
         return null;
     }
@@ -61,7 +64,7 @@ export default function ReactionListener() {
       {animations.map((anim, index) => (
         <div key={anim.id} className="absolute bottom-8">
           <Lottie
-            animationData={require(`../public${anim.animationPath}`)}
+            animationData={anim.animationPath}
             loop={false}
             autoplay={true}
             style={{
