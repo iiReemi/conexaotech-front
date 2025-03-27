@@ -50,6 +50,8 @@ useEffect(() => {
   }, [messages]);
 
   const sendMessage = () => {
+    if (typeof window === "undefined") return;
+    
     const nickname = localStorage.getItem("nickname") || "Anonimo";
     setUsername(nickname);
 

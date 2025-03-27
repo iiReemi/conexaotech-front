@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -9,6 +9,8 @@ export default function Nickname() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    
     const storedNickname = localStorage.getItem("nickname");
     if (!storedNickname) {
       setShowModal(true);
@@ -16,6 +18,8 @@ export default function Nickname() {
   }, []);
 
   const saveNickname = () => {
+    if (typeof window === "undefined") return;
+    
     if (nickname.trim()) {
       localStorage.setItem("nickname", nickname.trim());
       setShowModal(false);
