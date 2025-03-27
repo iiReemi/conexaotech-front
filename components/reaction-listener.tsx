@@ -1,10 +1,10 @@
 "use client";
 
+import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import Lottie from "lottie-react";
 
-const socket = io("http://localhost:4000");
+const socket = io(process.env.BACKEND);
 
 interface Reaction {
   type: string;

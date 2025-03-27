@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { Heart, Smile } from "lucide-react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { Button } from "./ui/button";
-import { Heart, ThumbsUp, PartyPopper, Smile, SmileIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 
-const socket = io("http://localhost:4000");
+const socket = io(process.env.BACKEND);
 
 interface EmojiReaction {
   type: string;
@@ -60,10 +60,14 @@ export default function EmojiReactions() {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (typeof window !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      if (typeof window !== "undefined") {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
     };
   }, []);
 
