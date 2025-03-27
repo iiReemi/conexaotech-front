@@ -38,12 +38,6 @@ export default function Home() {
       duration: 5,
     },
     {
-      id: "dev-tools",
-      title: "Nossas Ferramentas",
-      description: "O que usamos para criar sites incríveis",
-      duration: 5,
-    },
-    {
       id: "nextjs-performance",
       title: "Sites Ultra-Rápidos",
       description: "Como o Next.js torna nossos sites extremamente velozes",
@@ -51,7 +45,7 @@ export default function Home() {
     },
     {
       id: "nielsen-heuristics",
-      title: "10 Regras de Ouro do Design",
+      title: "10 Regras de Ouro do Frontend",
       description: "Princípios para criar sites que as pessoas adoram usar",
       duration: 10,
     },

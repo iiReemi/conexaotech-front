@@ -4,13 +4,17 @@ import { Timer } from "@/components/timer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Eye,
+  EyeIcon,
   Heart,
   MessageCircle,
   Plus,
   Send,
-  Smile
+  Smile,
+  Trash,
 } from "lucide-react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
@@ -56,6 +60,12 @@ export default function TopicPage() {
               Se um site fosse uma casa, o frontend seria tudo o que você pode
               ver e tocar: as paredes, janelas, portas e móveis.
             </p>
+          </div>
+
+          <div className="flex flex-row justify-between items-center">
+            <img src="/images/front-1.png" alt="" className="w-96" />
+            <ArrowRight />
+            <img src="/images/front-2.png" alt="" className="w-96" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2">
@@ -154,6 +164,12 @@ export default function TopicPage() {
               (CSS). O chef segue a receita, prepara o prato e o serve para você
               desfrutar.
             </p>
+          </div>
+
+          <div className="flex flex-row justify-between items-center">
+            <img src="/images/car-1.png" alt="" className="w-96" />
+            <ArrowRight />
+            <img src="/images/topic-2-2.jpg" alt="" className="w-96" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2">
@@ -264,6 +280,12 @@ export default function TopicPage() {
               em qual prateleira colocá-lo para que as pessoas o encontrem
               facilmente.
             </p>
+          </div>
+
+          <div className="flex flex-row justify-between items-center">
+            <img src="/images/topic-3-1.png" alt="" className="w-96" />
+            <ArrowRight />
+            <img src="/images/topic-3-2.png" alt="" className="w-96" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2">
@@ -387,6 +409,13 @@ export default function TopicPage() {
             </p>
           </div>
 
+          <div className="flex flex-row justify-between items-center">
+            <img src="/images/topic-4-1.png" alt="" className="w-96" />
+            <ArrowRight />
+            <img src="/images/topic-4-2.png" alt="" className="w-96" />
+          </div>
+          <img src="/images/topic-4-3.png" alt="" className="w-96" />
+
           <h3 className="text-xl font-semibold mb-2">
             Principais Ameaças ao Frontend
           </h3>
@@ -488,127 +517,6 @@ export default function TopicPage() {
       ),
     },
     {
-      id: "dev-tools",
-      title: "Ferramentas de Desenvolvimento",
-      description: "Ferramentas essenciais para desenvolvimento frontend",
-      duration: 5,
-      content: (
-        <>
-          <h2 className="text-2xl font-bold mb-4">
-            As Ferramentas que Usamos para Criar Sites Incríveis
-          </h2>
-
-          <p className="mb-4">
-            Assim como um carpinteiro precisa de martelos e serras, os
-            desenvolvedores frontend precisam de ferramentas específicas para
-            construir sites e aplicativos modernos. Vamos conhecer as principais
-            ferramentas que usamos no dia a dia.
-          </p>
-
-          <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg mb-4">
-            <p className="font-medium">Analogia simples:</p>
-            <p>
-              Se construir um site fosse como construir uma casa, estas seriam
-              nossas ferramentas: plantas arquitetônicas, equipamentos de
-              medição, ferramentas de carpintaria e sistemas de inspeção de
-              qualidade.
-            </p>
-          </div>
-
-          <h3 className="text-xl font-semibold mb-2">
-            Ferramentas que Usamos Diariamente
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">Ferramentas de Inspeção</h4>
-              <p className="mb-2">
-                Como um raio-X para websites, permitem ver o que está
-                acontecendo por baixo da superfície.
-              </p>
-              <ul className="list-disc pl-6">
-                <li>Ver como a página está estruturada</li>
-                <li>Identificar problemas de desempenho</li>
-                <li>Testar como o site aparece em diferentes dispositivos</li>
-                <li>Depurar quando algo não funciona corretamente</li>
-              </ul>
-            </div>
-
-            <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">Editores de Código</h4>
-              <p className="mb-2">
-                Como processadores de texto super avançados, especialmente
-                projetados para escrever código.
-              </p>
-              <ul className="list-disc pl-6">
-                <li>Destacam o código com cores para facilitar a leitura</li>
-                <li>Sugerem correções e melhorias automaticamente</li>
-                <li>Integram-se com outras ferramentas</li>
-                <li>Aumentam drasticamente a produtividade</li>
-              </ul>
-            </div>
-          </div>
-
-          <h3 className="text-xl font-semibold mb-2">
-            Ferramentas que Melhoram a Qualidade
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-secondary/10 dark:bg-secondary/20 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">Ferramentas de Teste</h4>
-              <p>
-                Como inspetores de qualidade, garantem que tudo funcione como
-                esperado.
-              </p>
-              <ul className="list-disc pl-6">
-                <li>Verificam se os botões fazem o que deveriam</li>
-                <li>Testam se o site funciona em diferentes navegadores</li>
-                <li>Simulam usuários reais interagindo com o site</li>
-                <li>
-                  Identificam problemas antes que os usuários os encontrem
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-secondary/10 dark:bg-secondary/20 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">Ferramentas de Otimização</h4>
-              <p>
-                Como afinadores de motor, fazem o site rodar mais rápido e
-                melhor.
-              </p>
-              <ul className="list-disc pl-6">
-                <li>Comprimem imagens sem perder qualidade</li>
-                <li>Reduzem o tamanho dos arquivos</li>
-                <li>Verificam a acessibilidade para todos os usuários</li>
-                <li>Medem o desempenho e sugerem melhorias</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="bg-muted dark:bg-muted/70 p-4 rounded-lg mb-4">
-            <h4 className="font-medium mb-2">
-              Por que isso importa para a empresa?
-            </h4>
-            <p>
-              As ferramentas certas significam desenvolvimento mais rápido,
-              menos bugs e melhor experiência para os usuários. Isso se traduz
-              diretamente em economia de custos, maior satisfação do cliente e
-              vantagem competitiva. Um estudo da Stripe estimou que
-              desenvolvedores perdem 42% do tempo lidando com ferramentas e
-              código ruins - ter as ferramentas certas é um investimento que se
-              paga rapidamente.
-            </p>
-          </div>
-
-          <p>
-            Com o conjunto certo de ferramentas, podemos criar experiências
-            digitais que não apenas atendem, mas superam as expectativas dos
-            usuários, mantendo-nos à frente da concorrência.
-          </p>
-        </>
-      ),
-    },
-    {
       id: "nextjs-performance",
       title: "Performance e Cache do Next.js",
       description: "Otimizações de performance e sistema de cache do Next.js",
@@ -633,6 +541,12 @@ export default function TopicPage() {
               pré-preparados que podem ser servidos imediatamente ou finalizados
               rapidamente conforme necessário.
             </p>
+          </div>
+
+          <div className="flex flex-row justify-between items-center">
+            <img src="/images/topic-5-1.png" alt="" className="w-96" />
+            <ArrowRight />
+            <img src="/images/topic-5-2.png" alt="" className="w-96" />
           </div>
 
           <h3 className="text-xl font-semibold mb-2">
@@ -1086,6 +1000,46 @@ export default function TopicPage() {
               </ul>
             </div>
 
+            <div className="flex flex-col gap-4 items-center">
+              <div className="flex flex-row gap-4 w-full justify-center items-center">
+                <div className="w-24 h-44 bg-black flex items-end justify-center">
+                  <div className="flex items-center gap-1">
+                    <EyeIcon color="white" size={14} />
+                    <span className="text-white font-semibold text-[10px]">
+                      112
+                    </span>
+                  </div>
+                </div>
+                <div className="w-24 h-40 bg-black flex items-end justify-center">
+                  <div className="flex items-center gap-1">
+                    <EyeIcon color="white" size={14} />
+                    <span className="text-white font-semibold text-[10px]">
+                      98
+                    </span>
+                  </div>
+                </div>
+                <div className="w-24 h-40 bg-black flex items-end justify-center">
+                  <div className="flex items-center gap-1">
+                    <EyeIcon color="white" size={14} />
+                    <span className="text-white font-semibold text-[10px]">
+                      77
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="w-2/5 flex flex-row justify-between shadow-md items-center p-2">
+                <div className="flex gap-2 items-center">
+                  <Eye size={18} />
+                  <span className="font-semibold text-sm">112</span>
+                </div>
+
+                <div className="w-0 h-0 border-l-6 border-r-6 border-b-[10px] border-l-transparent border-r-transparent border-b-black shadow-sm" />
+
+                <Trash size={18} className="hover:cursor-pointer" />
+              </div>
+            </div>
+
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 4. Seja consistente
@@ -1100,6 +1054,29 @@ export default function TopicPage() {
                   Cores e estilos visuais consistentes em toda a plataforma
                 </li>
               </ul>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex gap-1">
+                <Heart
+                  className={`h-8 w-8 text-zinc-500 hover:cursor-pointer ${
+                    postOperations.like && "text-red-600 fill-red-600"
+                  }`}
+                  onClick={() => {
+                    setPostOperations({
+                      ...postOperations,
+                      like: !postOperations.like,
+                    });
+                  }}
+                />
+                {postOperations.like ? "5" : "4"}
+              </div>
+              <div className="flex gap-1">
+                <MessageCircle className="h-8 w-8 text-zinc-500" /> 2
+              </div>
+              <div className="flex gap-1">
+                <Send className="h-8 w-8 text-zinc-500" /> 7
+              </div>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">

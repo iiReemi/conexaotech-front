@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Send, MessageCircle, X, Smile, User } from "lucide-react";
-import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
-import { randomUUID } from "crypto";
+import { MessageCircle, Send, Smile, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import { Input } from "./ui/input";
 
 const socket = io("http://localhost:4000");
 
@@ -81,7 +80,7 @@ export default function Chat() {
           <CardHeader className="rounded-t-lg p-4 bg-primary text-primary-foreground flex flex-col justify-between items-center">
             <div className="flex w-full justify-between">
               <span className="font-semibold text-left">
-                Digite seu nome e sobrenome
+                Chat em tempo real
               </span>
               <Button
                 variant="ghost"

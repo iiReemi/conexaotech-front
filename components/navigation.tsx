@@ -1,10 +1,10 @@
 "use client";
 
+import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Home, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export function Navigation() {
@@ -16,7 +16,6 @@ export function Navigation() {
     { id: "browser-interpretation", name: "Como os Navegadores Funcionam" },
     { id: "seo", name: "Como Aparecer no Google" },
     { id: "security", name: "Segurança no Frontend" },
-    { id: "dev-tools", name: "Nossas Ferramentas" },
     { id: "nextjs-performance", name: "Sites Ultra-Rápidos" },
     { id: "nielsen-heuristics", name: "10 Regras de Ouro" },
   ];
