@@ -2,11 +2,23 @@
 
 import { Timer } from "@/components/timer";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   ArrowRight,
+  Bookmark,
+  ChartColumnIcon,
+  CheckCheck,
   ChevronLeft,
   ChevronRight,
+  Ellipsis,
   Eye,
   EyeIcon,
   Heart,
@@ -30,12 +42,14 @@ export default function TopicPage() {
     milena: false,
     bruno: false,
     lincoln: false,
+    paiva: false,
   });
 
   const [postOperations, setPostOperations] = useState({
     like: false,
     comment: false,
     share: false,
+    saved: false,
   });
 
   const topics = [
@@ -884,6 +898,33 @@ export default function TopicPage() {
                     )}
                   </div>
                 </div>
+                <div
+                  className="flex flex-row gap-2 items-center hover:cursor-pointer"
+                  onMouseEnter={() => setTyping({ ...typing, paiva: true })}
+                  onMouseLeave={() => setTyping({ ...typing, paiva: false })}
+                >
+                  <div className="relative">
+                    <img
+                      src="/avatars/paiva.jpeg"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer"
+                    />
+                    <div className="absolute bottom-0 top-16 right-0 h-4 w-4 bg-green-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Bruno Paiva</span>
+                    {!typing.paiva && (
+                      <span className="text-sm">Digitando...</span>
+                    )}
+
+                    {typing.paiva && (
+                      <div className="flex gap-1 flex-row">
+                        <span className="font-bold text-sm">Oloko, brabo</span>
+                        <span className="text-zinc-500 text-sm">- agora</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -904,7 +945,7 @@ export default function TopicPage() {
               </ul>
             </div>
 
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 justify-between">
               <div className="flex flex-col space-y-2 items-center">
                 <div className="relative">
                   <img
@@ -1030,6 +1071,7 @@ export default function TopicPage() {
 
               <div className="w-2/5 flex flex-row justify-between shadow-md items-center p-2">
                 <div className="flex gap-2 items-center">
+                  <ChartColumnIcon size={18} />
                   <Eye size={18} />
                   <span className="font-semibold text-sm">112</span>
                 </div>
@@ -1057,10 +1099,12 @@ export default function TopicPage() {
             </div>
 
             <div className="flex gap-4">
-              <div className="flex gap-1">
+              <div className="flex gap-1 items-center">
                 <Heart
-                  className={`h-8 w-8 text-zinc-500 hover:cursor-pointer ${
-                    postOperations.like && "text-red-600 fill-red-600"
+                  className={`h-10 w-10 hover:cursor-pointer rounded-full p-1 transition-all ${
+                    postOperations.like
+                      ? "text-red-600 fill-red-600"
+                      : "text-zinc-500"
                   }`}
                   onClick={() => {
                     setPostOperations({
@@ -1069,13 +1113,14 @@ export default function TopicPage() {
                     });
                   }}
                 />
-                {postOperations.like ? "5" : "4"}
+                <Label>{postOperations.like ? "2.995" : "2.994"}</Label>
               </div>
-              <div className="flex gap-1">
-                <MessageCircle className="h-8 w-8 text-zinc-500" /> 2
+              <div className="flex gap-1 items-center">
+                <MessageCircle className="h-8 w-8 text-zinc-500" />{" "}
+                <Label>2</Label>
               </div>
-              <div className="flex gap-1">
-                <Send className="h-8 w-8 text-zinc-500" /> 7
+              <div className="flex gap-1 items-center">
+                <Send className="h-8 w-8 text-zinc-500" /> <Label>7</Label>
               </div>
             </div>
 
@@ -1086,6 +1131,25 @@ export default function TopicPage() {
                 <li>Como confirmação antes de apagar uma publicação</li>
                 <li>Como indicar se uma mensagem foi visualizada ou enviada</li>
               </ul>
+            </div>
+
+            <div className="flex gap-4 justify-between">
+              <div className="h-6 bg-[#015c4b] rounded-md rounded-tr-none p-4 flex items-center">
+                <span className="text-[#e9edef] text-sm">
+                  Conexãotech é hojeeeee
+                </span>
+              </div>
+              <div className="h-6 bg-[#015c4b] rounded-md rounded-tr-none p-4 flex items-center gap-2">
+                <span className="text-[#e9edef] text-sm">
+                  Conexãotech é hojeeeee
+                </span>
+                <div className="flex justify-end h-full pb-2">
+                  <span className="text-xs text-[#aac2bb]">13:31</span>
+                </div>
+                <div className="flex justify-end h-full pb-3">
+                  <CheckCheck className="text-[#aac2bb]" size={18} />
+                </div>
+              </div>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
@@ -1099,6 +1163,43 @@ export default function TopicPage() {
               </ul>
             </div>
 
+            <div className="w-full flex justify-center">
+              <div className="flex flex-row gap-6">
+                <div className="flex flex-col space-y-2 items-center">
+                  <img
+                    src="/avatars/ed.jpeg"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0 p-[3px] bg-gray-300"
+                  />
+                  <span className="text-zinc-500 text-sm">Seu story</span>
+                </div>
+                <div className="flex flex-col space-y-2 items-center">
+                  <img
+                    src="/avatars/joao.jpeg"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0 bg-gradient-to-r from-[#ffc901] to-[#d300c5] p-[3px]"
+                  />
+                  <span className="text-sm">joao.costa</span>
+                </div>
+                <div className="flex flex-col space-y-2 items-center">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQH-Rf02lJH8oA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682477255312?e=1747872000&v=beta&t=BLAMZlB1lFl7xtv5OhirOj0G6odPbi-aF_9O7UXKDfI"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0 bg-gradient-to-r from-[#ffc901] to-[#d300c5] p-[3px]"
+                  />
+                  <span className="text-sm">lucaspsanttana</span>
+                </div>
+                <div className="flex flex-col space-y-2 items-center">
+                  <img
+                    src="/avatars/pontaltech.jpg"
+                    alt="foto"
+                    className="w-24 h-24 rounded-full hover:cursor-pointer m-0 bg-gradient-to-r from-[#ffc901] to-[#d300c5] p-[3px]"
+                  />
+                  <span className="text-sm">pontaltech</span>
+                </div>
+              </div>
+            </div>
+
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">
                 7. Flexibilidade e eficiência
@@ -1110,6 +1211,96 @@ export default function TopicPage() {
                   Personalizar notificações por perfil ou conteúdo específico
                 </li>
               </ul>
+            </div>
+
+            <div className="flex flex-col gap-4 items-center w-full">
+              <div className="flex flex-col gap-4 items-center w-2/5 min-w-80">
+                <div className=" w-full flex gap-2 items-center justify-between px-4">
+                  <div className="flex flex-row gap-2 items-center">
+                    <img
+                      src="https://media.licdn.com/dms/image/v2/D4D03AQH-Rf02lJH8oA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1682477255312?e=1747872000&v=beta&t=BLAMZlB1lFl7xtv5OhirOj0G6odPbi-aF_9O7UXKDfI"
+                      alt="foto"
+                      className="w-12 h-12 rounded-full hover:cursor-pointer m-0 bg-gradient-to-r from-[#ffc901] to-[#d300c5] p-[3px]"
+                    />
+                    <span className="font-semibold">lucaspsanttana</span>
+                    <span className="text-zinc-500 font-semibold text-sm">
+                      {" "}
+                      • 1 dia
+                    </span>
+                  </div>
+                  <Ellipsis className="hover:cursor-pointer" />
+                </div>
+                <Carousel
+                  opts={{
+                    loop: true,
+                  }}
+                >
+                  <CarouselContent>
+                    <CarouselItem>
+                      <img
+                        src="/images/post-1.webp"
+                        alt=""
+                        className="p-0 m-0 rounded-sm"
+                      />
+                    </CarouselItem>
+                    <CarouselItem className="flex justify-center items-center">
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        height={200}
+                        width={300}
+                        src="/videos/post-2.mp4"
+                        className="p-0 m-0 rounded-sm"
+                      />
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex gap-4">
+                    <div className="flex gap-1 items-center">
+                      <Heart
+                        className={`h-10 w-10 hover:cursor-pointer rounded-full p-1 transition-all ${
+                          postOperations.like
+                            ? "text-red-600 fill-red-600"
+                            : "text-zinc-500"
+                        }`}
+                        onClick={() => {
+                          setPostOperations({
+                            ...postOperations,
+                            like: !postOperations.like,
+                          });
+                        }}
+                      />
+                      <Label>{postOperations.like ? "2.995" : "2.994"}</Label>
+                    </div>
+                    <div className="flex gap-1 items-center">
+                      <MessageCircle className="h-8 w-8 text-zinc-500" />{" "}
+                      <Label>571</Label>
+                    </div>
+                    <div className="flex gap-1 items-center">
+                      <Send className="h-8 w-8 text-zinc-500" />{" "}
+                      <Label>281</Label>
+                    </div>
+                  </div>
+
+                  <Bookmark
+                    className={`h-10 w-10 hover:cursor-pointer rounded-full p-1 transition-all ${
+                      postOperations.saved
+                        ? "text-stone-600 fill-stone-600"
+                        : "text-zinc-500"
+                    }`}
+                    onClick={() => {
+                      setPostOperations({
+                        ...postOperations,
+                        saved: !postOperations.saved,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="bg-primary/10 dark:bg-primary/20 p-4 rounded-lg">
@@ -1165,7 +1356,7 @@ export default function TopicPage() {
   const topic = topics.find((t) => t.id === topicId);
 
   if (!topic) {
-    return <>Tópico não encontrado</>
+    return <>Tópico não encontrado</>;
   }
 
   const currentIndex = topics.findIndex((t) => t.id === topicId);
