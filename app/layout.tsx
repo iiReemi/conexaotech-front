@@ -5,6 +5,7 @@ import type React from "react";
 import "./globals.css";
 
 import Nickname from "@/components/nickname";
+import ReactionListener from "@/components/reaction-listener";
 import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,7 +33,7 @@ export default function RootLayout({
           {children}
           <Toaster />
           <Nickname />
-          {/* <ReactionListener /> */}
+          <ReactionListener />
           {/* <Chat /> */}
           {/* <EmojiReactions /> */}
         </ThemeProvider>
