@@ -17,7 +17,7 @@ import {
   Trash,
 } from "lucide-react";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 export default function TopicPage() {
@@ -1165,7 +1165,7 @@ export default function TopicPage() {
   const topic = topics.find((t) => t.id === topicId);
 
   if (!topic) {
-    return notFound();
+    return <>Tópico não encontrado</>
   }
 
   const currentIndex = topics.findIndex((t) => t.id === topicId);
